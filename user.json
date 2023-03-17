@@ -1,0 +1,29 @@
+{
+    "id": '109654543068110428267',
+    "displayName": 'Purushothaman G',
+    "name": { familyName: 'G', givenName: 'Purushothaman' },
+    "emails": [ [Object] ],
+    "photos": [ [Object] ],
+    "provider": 'google',
+    "_raw": '{\n' +
+      '  "sub": "109654543068110428267",\n' +
+      '  "name": "Purushothaman G",\n' +
+      '  "given_name": "Purushothaman",\n' +
+      '  "family_name": "G",\n' +
+      '  "picture": "https://lh3.googleusercontent.com/a/AGNmyxZZeMvBW0Y_awXuvgnzqYlGFbtXkD3ARHjNEKwP\\u003ds96-c",\n' +
+      '  "email": "officialpurushothaman@gmail.com",\n' +
+      '  "email_verified": true,\n' +
+      '  "locale": "en"\n' +
+      '}',
+    "_json": {
+      "sub": '109654543068110428267',
+      "name": 'Purushothaman G',
+      "given_name": 'Purushothaman',
+      "family_name": 'G',
+      "picture": 'https://lh3.googleusercontent.com/a/AGNmyxZZeMvBW0Y_awXuvgnzqYlGFbtXkD3ARHjNEKwP=s96-c',
+      "email": 'officialpurushothaman@gmail.com',
+      "email_verified": true,
+      "locale": 'en'
+    }
+}
+

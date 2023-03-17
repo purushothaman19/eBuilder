@@ -1,0 +1,39 @@
+
+
+section#Lander{
+    padding: 7% 5% 9%;
+}
+
+#l-brand{
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+#quote{
+    font-size: x-large;
+    padding: 0 10%;
+}
+
+#author{
+    font-size: larger;
+}
+
+button#explore{
+    margin-top: 3%;
+    text-transform: capitalize;
+    padding: 0.5% 3% !important;
+    border: 1px solid #FF74B1;
+    background: none;
+    font-size: medium;
+    color: #FF74B1;
+    font-weight: bold;
+    transition: all 0.6s;
+    border-radius: 30px;
+}
+
+button#explore:hover{
+    background: #ff65a844;
+    border: 1px solid #ff65a800;
+    cursor: pointer;
+    color: white;
+}

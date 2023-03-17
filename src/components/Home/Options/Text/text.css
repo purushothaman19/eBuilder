@@ -1,0 +1,32 @@
+
+
+section#text{
+    margin: 5% 15%;
+    width: 70% !important;
+    border: 1px #F2DCD5 solid;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+
+.text-div{
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    padding: 5em !important;
+}
+
+.Textbtn{
+    font-size: 15px;
+    padding: 5% 10% !important;
+    border: 0.4px solid #FD8A8A;
+    transition: all 0.6s;
+    background: #FD8A8A;
+    border-radius: 30px;
+}
+
+.Textbtn:hover{
+    cursor: pointer;
+    background: none;
+}

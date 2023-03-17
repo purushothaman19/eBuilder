@@ -1,0 +1,63 @@
+
+
+
+section#q-area{
+    padding: 5%;
+}
+
+#quiz-wrapper{
+    display: flex;
+}
+
+.react-quiz-container{
+    /* margin: 0 !important; */
+    width: 100% !important;
+    margin: 5% 20% !important;
+    padding: 5% !important;
+    background: whitesmoke;
+}
+
+section#test{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7%;
+    flex-direction: column;
+}
+
+
+#ResultPage{
+    width: 25em;   
+    margin-top: 5%;
+    transition: all 0.8s;
+}
+
+#score-div{
+    border-radius: 9px;
+    background: wheat;
+    transition: all 0.8s;
+    padding: 3% 5% 0;
+}
+
+#score{
+    font-size: 4.5em;
+    margin-top: 1%;
+    transition: all 0.8s;
+}
+
+
+#Summary{
+    width: 100%;
+    margin-top: 3%;
+    padding: 5%;
+    transition: all 0.8s;
+}
+
+
+/* .ques {
+    text-transform: lowercase;
+}
+
+.ques:first-letter {
+text-transform: uppercase;
+} */

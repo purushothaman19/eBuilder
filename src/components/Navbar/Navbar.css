@@ -1,0 +1,17 @@
+
+
+#brand{
+    font-size: 1.7em;
+    margin-right: 3%;    
+}
+
+.menubtn-l{
+    margin: 0;
+    margin-right: 2% !important;
+}
+
+.menubtn-l:hover{
+    background: transparent !important;
+    opacity: 0.6;
+    transition: all 1s;
+}
