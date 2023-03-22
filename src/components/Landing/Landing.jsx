@@ -31,10 +31,21 @@ const theme = createTheme();
 export default function LandingPage() {
 
   const [spinner, showSpinner] = useState(false);
+  const [vUser, setVUser]= useState(false);
+
+  // const checkValidation = async () => { 
+  //   const res = await fetch('http://localhost:3002/validUser');
+  //   const user = await res.json();
+  //   console.log(user);
+  //   setVUser( user );
+  // }
+
+  // useEffect(()=>{   
+  //     if(vUser) 
+  // })
 
   useEffect(()=>{
        setTimeout(()=>{
-           console.log(spinner);
            showSpinner(true);
        }, 2000);
   })
@@ -50,7 +61,7 @@ export default function LandingPage() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1677613935629-5de03180c113?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

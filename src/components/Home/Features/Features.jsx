@@ -15,8 +15,8 @@ const icons = [
 
 export default function Feature(props){
 
-    const address = String(window.location.origin);
-    console.log(address);
+    // const address = String(window.location.origin);
+    // console.log(address);
 
     const LinkData = {
         0: ["Google Sheets", 'Continue with your google sheets', `sheets`],
@@ -46,7 +46,7 @@ export default function Feature(props){
                             </CardContent>
                             <CardActions style={{display:'flex', justifyContent:'flex-end'}}>
                                 <a style={{textDecoration:'none', width:'100%'}} href={ '/'+LinkData[index][2] }>
-                                     <button className='fbtns'>Learn More</button> 
+                                     <button className='fbtns'>Create</button> 
                                 </a>
                             </CardActions>
                         </React.Fragment>

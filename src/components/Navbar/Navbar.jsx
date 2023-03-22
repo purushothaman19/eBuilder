@@ -13,9 +13,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import './Navbar.css';
 
-const pages = ['Products', 'Pricing', 'About'];
-const settings = ['dashboard', 'logout'];
-
 function Navbar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -34,6 +31,9 @@ function Navbar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const home = window.location.pathname==='/';
+  // console.log(home);
 
   return (
     <AppBar position="static" style={{ background:'transparent', boxShadow:'none', color:'black', padding:'5% 5% 2%' }} >
@@ -86,7 +86,12 @@ function Navbar(props) {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu} stlye={{color:'black'}} className='menubtns'>
-                  <a href='#features'><Typography textAlign="center" stlye={{color:'black'}}> Features </Typography></a>
+                {(
+                  home ? 
+                   <a href='#features'><Typography textAlign="center" stlye={{color:'black'}}> Features </Typography></a>
+                  :
+                   <a href='/'><Typography textAlign="center" stlye={{color:'black'}}> Home </Typography></a>
+                )}
               </MenuItem>
 
 
@@ -112,24 +117,36 @@ function Navbar(props) {
             ExamBuilder
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <a href='#features' style={{ textDecoration:'none',  }}> 
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'black', display: 'block' }}
-                  style={{ textTransform:'capitalize' }}
-                  className='menubtn-l'
-                >
-                  Features
-                </Button>
-              </a>
+
+              {(
+                  home ? 
+                   <a href='#features' style={{ textDecoration:'none' }}> 
+                    <Button
+                      sx={{ my: 2, color: 'black', display: 'block' }}
+                      style={{ textTransform:'capitalize' }}
+                      className='menubtn-l'
+                    >
+                      Features
+                    </Button>
+                  </a>
+                  :
+                  <a href='/' style={{ textDecoration:'none' }}> 
+                    <Button
+                      sx={{ my: 2, color: 'black', display: 'block' }}
+                      style={{ textTransform:'capitalize' }}
+                      className='menubtn-l'
+                    >
+                      Home
+                    </Button>
+                  </a>
+              )}
+              
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={ window.sessionStorage.getItem('dp') } />
+                <Avatar alt="Remy Sharp" src={ window.localStorage.getItem('dp') } />
               </IconButton>
-            </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -147,7 +164,7 @@ function Navbar(props) {
               onClose={handleCloseUserMenu}
             >
                 <MenuItem onClick={handleCloseUserMenu} stlye={{color:'black'}} className='menubtns'>
-                  <a href='/dashboard' style={{textDecoration:'none'}}> <Typography textAlign="center" stlye={{color:'black'}}> Dashboard </Typography> </a>
+                  <a href='/dashboard' style={{textDecoration:'none', width:"100%"}}> <Typography textAlign="center" stlye={{color:'black'}}> Dashboard </Typography> </a>
                 </MenuItem>
 
                 <MenuItem onClick={handleCloseUserMenu} stlye={{color:'black'}} className='menubtns'>

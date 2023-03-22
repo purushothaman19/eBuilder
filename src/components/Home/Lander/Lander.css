@@ -32,8 +32,28 @@ button#explore{
 }
 
 button#explore:hover{
-    background: #ff65a844;
+    background: #FF74B1;
     border: 1px solid #ff65a800;
+    cursor: pointer;
+    color: white;
+}
+
+button#dash{
+    margin-top: 3%;
+    text-transform: capitalize;
+    padding: 0.5% 3% !important;
+    border: 1px solid #865DFF;
+    background: none;
+    font-size: medium;
+    color: #865DFF;
+    font-weight: bold;
+    transition: all 0.6s;
+    border-radius: 30px;
+}
+
+button#dash:hover{
+    background: #865DFF;
+    border: 1px solid #865DFF;
     cursor: pointer;
     color: white;
 }

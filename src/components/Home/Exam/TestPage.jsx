@@ -10,27 +10,39 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Grid } from "@mui/material";
 import Summary from "./Summary";
 import Countdown from "react-countdown";
-import { Prompt, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 
-const steps = [
-  {
-    question: `Who is Modi?`,
-    options: [ 'PM', 'CM', 'AM', 'Unknown' ]
-  },
-  {
-    question: `Who is Messi?`,
-    options: [ 'GOAT', 'GOD', 'KING', 'Unknown' ]
-  },
-  {
-    question: `Who is MSD?`,
-    options: [ 'THALA', 'MAHI', 'FINISHER', 'Unknown' ]
-  },
-];
+// const steps = [
+//   {
+//     question: `Who is Modi?`,
+//     options: [ 'PM', 'CM', 'AM', 'Unknown' ]
+//   },
+//   {
+//     question: `Who is Messi?`,
+//     options: [ 'GOAT', 'GOD', 'KING', 'Unknown' ]
+//   },
+//   {
+//     question: `Who is MSD?`,
+//     options: [ 'THALA', 'MAHI', 'FINISHER', 'Unknown' ]
+//   },
+// ];
 
 // const correctAnswers = [0,1,0];
 
 
 export default function TestPage(props) {
+
+  const navigate = useNavigate();
+  const [ failed,fetched  ] = React.useState(true);
+  const [validUser, setVUser] = React.useState();
+  async function validation(){
+    const res = await fetch('http://localhost:3002/validUser')
+    .catch((r)=> fetched(false) );
+    const user = await res.json();
+    setVUser(user);
+    if(!user) return navigate('/');
+  }
+  React.useEffect(()=>{ if(!validUser) validation(); })
 
     const quesData = JSON.parse(window.localStorage.getItem('questionData'));
     console.log(quesData);
@@ -38,7 +50,7 @@ export default function TestPage(props) {
     const testName = quesData.quizTitle;
     const quesAns = quesData.questions;
     const duration = quesData.duration;
-    const correctAnswers = quesData.correctAnswers;
+    const correctAnswers = quesData.correctAnswers;   
 
     console.log(correctAnswers);
     let crtAns = [];
@@ -46,10 +58,11 @@ export default function TestPage(props) {
         crtAns.push( element.options[correctAnswers[i]] );
     });
 
+    if (window.localStorage.getItem('start')==='null') window.localStorage.setItem('start', Number(Date.now()));
+
     const [data, setData] = React.useState(
-        { date: Date.now(), delay: (60000*duration) } //60 seconds
-      );
-      const wantedDelay = 60000; //60 s
+        { date: window.localStorage.getItem('start') ? Number(window.localStorage.getItem('start')) : Date.now(), delay: (duration * 60000) } //60 seconds
+    );
 
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -98,11 +111,21 @@ export default function TestPage(props) {
         window.onbeforeunload = function(){
             return 'Are you sure you want to leave?';
         };
-    });
+    },[ansText, quesAns]);
 
 
     const onSubmit = () => {
 
+      const now = Date.now();
+      const endDate = Math.abs(now - Number(window.localStorage.getItem('start')));
+
+      const seconds = Math.floor((endDate/1000));
+      const minutes = Math.floor(( seconds/60 ));
+      const hours   = Math.floor(( minutes/60 ));
+
+      const timeTaken = hours + ":" + minutes + ":"+ seconds;
+      console.log(hours + ":" + minutes + ":"+ seconds );
+      localStorage.removeItem('start');
         showRslt(true);
         setWidth(6);
         let score=0
@@ -113,6 +136,26 @@ export default function TestPage(props) {
           });
         }
         setPoints(score);
+      
+      const postSummary = async() => {
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+              { 
+                  name:testName,
+                  duration:String(timeTaken),
+                  marks:score
+              })
+      };
+
+      let response = await fetch('http://localhost:3002/postSummary', requestOptions).catch((r)=> fetched(false) );
+        console.log(hours + ":" + minutes + ":"+ seconds );
+        console.log(response);
+      } 
+
+      postSummary();
+    
     }
   
     const handleNext = () => {
@@ -132,53 +175,36 @@ export default function TestPage(props) {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const getLocalStorageValue = (s) => localStorage.getItem(s);
-
     React.useEffect(() => {
-
-        const savedDate = getLocalStorageValue("end_date");
-
-        if (savedDate != null && !isNaN(savedDate)) {
-          const currentTime = Date.now();
-          const delta = parseInt(savedDate, 10) - currentTime;
-    
-          //Do you reach the end?
-          if (delta > wantedDelay) {
-            //Yes we clear uour saved end date
-            if (localStorage.getItem("end_date").length > 0)
-              localStorage.removeItem("end_date");
-          } else {
-            //No update the end date  
-            setData({ date: currentTime, delay: delta });
-          }
-        }
-
     }, []);
-
-    const navigate = useNavigate();
-    React.useEffect(()=>{ if(window.localStorage.getItem('loggedIn')!=='true') navigate('/login'); })
 
   return (
     <section id="test">
+                      { (!failed) ? 
+            <div>
+              <img style={{width:'50%'}} src='https://i.graphicmama.com/blog/wp-content/uploads/2016/12/06083212/gravity_drib2.gif' alt='' />
+              <h3> Cannot recieve our services, Sorry! </h3>
+            </div> 
+      :
+      <>
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
                     { !result && 
                 <Grid item xs={12} sm={12} md={width} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', opacity:1, }} >
 
-        <h2 className="ques"> {testName} </h2>
+        <h2 className="ques" style={{ textTransform:'uppercase' }} > {testName} </h2>
         <Countdown
-            date={data.date + 6000}
-            // date={data.date + data.delay}
+            // date={data.date + 6000}
+            date={data.date + data.delay}
             renderer={renderer}
             onStart={(delta) => {
-            //Save the end date
-            console.log("end_date: " + localStorage.getItem("end_date"));
-            if (localStorage.getItem("end_date") === null) localStorage.setItem( "end_date", JSON.stringify(data.date + data.delay) );
+              if (window.localStorage.getItem('start')===null) window.localStorage.setItem('start', Number(Date.now()));
             }}
 
             onComplete={() => {
-              if (localStorage.getItem("end_date") !== null) localStorage.removeItem("end_date");
+              console.log('ys');
               onSubmit();
+              window.localStorage.removeItem('start');
             }}
         />
 
@@ -269,6 +295,8 @@ export default function TestPage(props) {
             }
 
         </Grid>
+        </>
+      }
     </section>
   );
 }

@@ -30,7 +30,8 @@ export default function Lander(props){
                         </p>
                         <p id='author'> - The developer </p>
                         <div className='explore-sec'>
-                        <a href='#features' style={{textDecoration:'none'}}><Button id='explore'> Explore </Button></a>
+                        <a href='#features' style={{textDecoration:'none', marginRight:'3%'}}><Button id='explore'> Explore  </Button></a>
+                        <a href='/dashboard' style={{textDecoration:'none'}}><Button id='dash'> Dashboard </Button></a>
                     </div>
                     </div>
                 </Grid>

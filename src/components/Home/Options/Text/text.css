@@ -26,7 +26,12 @@ section#text{
     border-radius: 30px;
 }
 
-.Textbtn:hover{
+.Textbtn:hover:not(:disabled){
     cursor: pointer;
     background: none;
+}
+
+
+.Textbtn:disabled{
+    opacity: 0.5;
 }
