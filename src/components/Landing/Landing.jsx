@@ -88,7 +88,7 @@ export default function LandingPage() {
             <p id='account_text'> Use your <a style={{color:'blue'}} href='https://support.google.com/accounts/answer/27441?hl=en'> Google account </a>  to get in! </p>
             <Box component="form" sx={{ mt: 1 }}>
                
-                <a href='http://localhost:3002/login' style={{ textDecoration:'none' }}>
+                <a href='https://exbuilder.onrender.com/login' style={{ textDecoration:'none' }}>
                 <Button
                     fullWidth
                     variant="outlined"

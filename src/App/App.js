@@ -14,6 +14,9 @@ import Dashboard from '../components/Home/Dashboard/Dashboard';
 import Navbar from '../components/Navbar/Navbar';
 import TestPage from '../components/Home/Exam/TestPage';
 
+const WEB_URL = 'https://exbuilder.onrender.com';
+const LOC_URL = 'https://exbuilder.onrender.com';
+
 
 function App() {
 
@@ -22,7 +25,7 @@ function App() {
   const [ failed,fetched  ] = useState(true);
 
   const getData = async () => {
-    const res = await fetch('http://localhost:3002/getUser')
+    const res = await fetch('https://exbuilder.onrender.com/getUser')
     .catch((r)=> fetched(false) );
     const user = await res.json();
     if (user) {
@@ -38,7 +41,7 @@ function App() {
   }
 
   const checkValidation = async () => { 
-    const res = await fetch('http://localhost:3002/validUser')
+    const res = await fetch('https://exbuilder.onrender.com/validUser')
     .catch((r)=> fetched(false) );
     const propUser = await res.json();
     setVUser( propUser );
@@ -53,7 +56,7 @@ function App() {
     setUser({});
     setVUser(false);
     localStorage.clear();
-    const fet =  await fetch("http://localhost:3002/logout");
+    const fet =  await fetch("https://exbuilder.onrender.com/logout");
     const res = await fet.json();
     console.log(res);
   }

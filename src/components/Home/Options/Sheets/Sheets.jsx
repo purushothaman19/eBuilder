@@ -57,7 +57,7 @@ export default function Sheets(props) {
   const [ failed,fetched  ] = useState(true);
   const [validUser, setVUser] = useState();
   async function validation(){
-    const res = await fetch('http://localhost:3002/validUser')
+    const res = await fetch('https://exbuilder.onrender.com/validUser')
     .catch((r)=> fetched(false) );
     const user = await res.json();
     setVUser(user);
@@ -79,7 +79,7 @@ export default function Sheets(props) {
   const handleSLink = (e) => setSLink(e.target.value);
 
   const getData = async () => {
-    const res = await fetch("http://localhost:3002/getTestNames");
+    const res = await fetch("https://exbuilder.onrender.com/getTestNames");
     const data = await res.json();
     // console.log(data);
     setTestNames(data);
@@ -143,7 +143,7 @@ export default function Sheets(props) {
       confirmButtonText: "Confirm",
       showLoaderOnConfirm: true,
       preConfirm: async (e) => {
-        const res = await fetch(`http://localhost:3002/sheets`, requestOptions);
+        const res = await fetch(`https://exbuilder.onrender.com/sheets`, requestOptions);
         console.log(res.status);
         if (res.status === 401) {
           setErr("Enter valid Link!");

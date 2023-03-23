@@ -36,7 +36,7 @@ export default function TestPage(props) {
   const [ failed,fetched  ] = React.useState(true);
   const [validUser, setVUser] = React.useState();
   async function validation(){
-    const res = await fetch('http://localhost:3002/validUser')
+    const res = await fetch('https://exbuilder.onrender.com/validUser')
     .catch((r)=> fetched(false) );
     const user = await res.json();
     setVUser(user);
@@ -149,7 +149,7 @@ export default function TestPage(props) {
               })
       };
 
-      let response = await fetch('http://localhost:3002/postSummary', requestOptions).catch((r)=> fetched(false) );
+      let response = await fetch('https://exbuilder.onrender.com/postSummary', requestOptions).catch((r)=> fetched(false) );
         console.log(hours + ":" + minutes + ":"+ seconds );
         console.log(response);
       } 

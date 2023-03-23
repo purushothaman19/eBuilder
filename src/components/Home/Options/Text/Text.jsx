@@ -61,7 +61,7 @@ export default function ViaText(props){
   const [ failed,fetched  ] = useState(true);
   const [validUser, setVUser] = useState();
   async function validation(){
-    const res = await fetch('http://localhost:3002/validUser')
+    const res = await fetch('https://exbuilder.onrender.com/validUser')
     .catch((r)=> fetched(false) );
     const user = await res.json();
     setVUser(user);
@@ -77,7 +77,7 @@ export default function ViaText(props){
     const [Loading, isLoading] = useState(true);
 
     const getData = async () => {
-      const res = await fetch("http://localhost:3002/getTestNames");
+      const res = await fetch("https://exbuilder.onrender.com/getTestNames");
       const data = await res.json();
       // console.log(data);
       setTestNames(data);
@@ -131,7 +131,7 @@ export default function ViaText(props){
                 })
         };
 
-        let response = await fetch('http://localhost:3002/text', requestOptions);
+        let response = await fetch('https://exbuilder.onrender.com/text', requestOptions);
         console.log(response);
         if(response.status===200){
             getData();

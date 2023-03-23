@@ -12,7 +12,7 @@ export default function Home(props){
     const navigate = useNavigate();
     const [validUser, setVUser] = useState();
     async function validation(){
-      const res = await fetch('http://localhost:3002/validUser');
+      const res = await fetch('https://exbuilder.onrender.com/validUser');
       const user = await res.json();
       setVUser(user);
       if(!user) return navigate('/');

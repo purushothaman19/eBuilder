@@ -51,7 +51,7 @@ export default function Dashboard() {
 
   const [validUser, setVUser] = React.useState();
   async function validation(){
-    const res = await fetch('http://localhost:3002/validUser')
+    const res = await fetch('https://exbuilder.onrender.com/validUser')
     .catch((r)=> fetched(false) );
     const user = await res.json();
     setVUser(user);
@@ -65,7 +65,7 @@ export default function Dashboard() {
   const [Loading, isLoading] = React.useState(true);
 
   const getData = async () => {
-    const res = await fetch('http://localhost:3002/getTests');
+    const res = await fetch('https://exbuilder.onrender.com/getTests');
     const data = await res.json();
 
     Object.keys(data).forEach((test, i)=>{
@@ -85,7 +85,7 @@ export default function Dashboard() {
   const [sumData, setSumData] = React.useState({});
 
   const getSummary = async(e) => {
-    const res = await fetch('http://localhost:3002/getSummary');
+    const res = await fetch('https://exbuilder.onrender.com/getSummary');
     const data = await res.json();
     console.log(data);
     setSumData(data);
