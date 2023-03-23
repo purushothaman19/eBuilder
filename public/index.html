@@ -29,6 +29,9 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
 
+    <!--  OAuth Github -->
+  <script src="https://unpkg.com/netlify-auth-providers"></script>
+
   
 <!-- UIkit JS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.7/dist/css/uikit.min.css" />
@@ -57,5 +60,47 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      const anchorTag = document.getElementById("login");
+      const outputToken = document.getElementById("output-token");
+      const outputEmail = document.getElementById("output-email");
+
+      anchorTag.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const authenticator = new netlify.default({});
+
+        authenticator.authenticate(
+          // Set the OAuth provider and token scope
+          // Provider can be "github", "gitlab", or "bitbucket"
+          // The scopes available depend on your OAuth provider
+          { provider: "github", scope: "user" },
+          async function (error, data) {
+            if (error) {
+              outputToken.innerText =
+                "Error Authenticating with GitHub: " + error;
+            } else {
+              outputToken.innerText =
+                "Authenticated with GitHub. Access Token: " +
+                data.token;
+              outputEmail.innerText = await loadGitHubUserEmails(
+                data.token
+              );
+            }
+          }
+        );
+      });
+
+      async function loadGitHubUserEmails(token) {
+        return await fetch("https://api.github.com/user/emails", {
+          headers: {
+            Accept: "application/vnd.github.v3+json",
+            Authorization: `token ${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((response) => JSON.stringify(response));
+      }
+    </script>
   </body>
 </html>
